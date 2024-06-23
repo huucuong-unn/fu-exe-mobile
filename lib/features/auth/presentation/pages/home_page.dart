@@ -4,6 +4,8 @@ import 'package:tortee/features/auth/presentation/pages/edit_profile_page.dart';
 import 'package:tortee/features/auth/presentation/pages/faq_page.dart';
 import 'package:tortee/features/auth/presentation/pages/my_mentor_page.dart';
 import 'package:tortee/features/auth/presentation/pages/my_request_page.dart';
+import 'package:tortee/features/auth/presentation/pages/news_page.dart';
+import 'package:tortee/features/auth/presentation/pages/notification_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -69,7 +71,7 @@ class HomePage extends StatelessWidget {
                         ),
                         _buildMenuItem(
                           icon: Icons.edit,
-                          label: 'Edit Your Profile',
+                          label: 'View Your Profile',
                           onTap: () {
                             // Navigate to Account settings
                             Navigator.push(
@@ -88,7 +90,7 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => EditProfilePage(),
+                                builder: (context) => NewsPage(),
                               ),
                             );
                           },

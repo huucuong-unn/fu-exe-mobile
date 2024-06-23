@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "315384652986",
+    "project_id": "tortee-60675",
+    "storage_bucket": "tortee-60675.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315384652986:android:bf6b73af6353c44539ce83",
+        "android_client_info": {
+          "package_name": "com.example.tortee"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeuJ3E4bHuAmv6EUufFSOFzphfmJSbjX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

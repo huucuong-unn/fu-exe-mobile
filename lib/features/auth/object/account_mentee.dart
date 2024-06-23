@@ -18,11 +18,11 @@ class AccountMentee {
   });
 
   AccountMentee.fromJson(Map<String, dynamic> json)
-      : id = json['student']['account']['id'],
-        name = json['student']['name'],
-        email = json['student']['account']['email'],
-        imageUrl = json['student']['account']['avatarUrl'],
-        studentCode = json['student']['studentCode'],
-        university = json['student']['university']['name'],
-        point = json['student']['account']['point'];
+      : id = json['account']['id'],
+        name = json['name'],
+        email = json['account']['email'],
+        imageUrl = json['account']['avatarUrl'],
+        studentCode = json['studentCode'],
+        university = json['university']['name'],
+        point = json['account']['point'];
 }

@@ -8,6 +8,7 @@ import 'package:tortee/features/auth/presentation/pages/faq_page.dart';
 import 'package:tortee/features/auth/presentation/pages/login_page.dart';
 import 'package:tortee/features/auth/presentation/pages/mentor_page.dart';
 import 'package:tortee/features/auth/presentation/pages/my_request_page.dart';
+import 'package:tortee/features/auth/presentation/pages/news_page.dart';
 import 'package:tortee/utils/image_url_host.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -75,7 +76,7 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   ListTile(
                     leading: const Icon(Icons.person, color: Colors.black),
-                    title: const Text('Edit Profile',
+                    title: const Text('Profile',
                         style: TextStyle(color: Colors.black)),
                     onTap: () {
                       // Navigate to Account settings
@@ -122,6 +123,12 @@ class ProfilePage extends StatelessWidget {
                         style: TextStyle(color: Colors.black)),
                     onTap: () {
                       // Navigate to Notifications settings
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NewsPage(),
+                        ),
+                      );
                     },
                   ),
                   ListTile(

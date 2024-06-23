@@ -1,19 +1,39 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tortee/controller/firebase_api.dart';
+import 'package:tortee/controller/mentor_controller.dart';
 import 'package:tortee/core/theme/app_pallete.dart';
 import 'package:tortee/core/theme/theme.dart';
 import 'package:get/get.dart';
+import 'package:tortee/features/auth/presentation/pages/notification_page.dart';
 import 'package:tortee/features/auth/presentation/pages/starter.dart';
 import 'package:tortee/features/auth/presentation/widgets/footer.dart';
+import 'package:tortee/firebase_options.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+
+final navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseApi().initializeNotifications();
+
+  FirebaseAnalytics analytics;
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var token = prefs.getString("token");
   print(token);
   runApp(GetMaterialApp(
+    initialBinding: BindingsBuilder(() {
+      Get.put(MentorController());
+    }),
     debugShowCheckedModeBanner: false,
+    navigatorKey: navigatorKey,
     home: token == null ? StarterPage() : BottomNavigationBarExample(),
+    routes: {
+      '/notification': (context) => const NotificationPage(),
+    },
   ));
 }
 

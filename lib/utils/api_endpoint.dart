@@ -1,6 +1,7 @@
 class ApiEndpoint {
-  static final String baseUrl = 'http://localhost:8086/api/v1';
-  // 'https://tortee-463vt.ondigitalocean.app/api/v1';
+  static final String baseUrl =
+      // 'http://localhost:8086/api/v1';
+      'https://tortee-463vt.ondigitalocean.app/api/v1';
   static _AuthEndpoint auth = _AuthEndpoint();
   static _CampaignEndpoint campaign = _CampaignEndpoint();
   static _MentorEndpoint mentor = _MentorEndpoint();
@@ -20,6 +21,7 @@ class _CampaignEndpoint {
 class _MentorEndpoint {
   final String getAll = '/mentors';
   final String getActive = '/mentor/mentor-status-true?page=1&limit=1';
+  final String getMyMentorNow = '/mentor/student/';
 }
 
 class _AccountMenteeEndpoint {

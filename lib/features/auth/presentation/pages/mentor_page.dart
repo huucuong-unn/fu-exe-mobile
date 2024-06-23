@@ -1,63 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tortee/controller/mentor_controller.dart';
 import 'package:tortee/features/auth/object/mentor.dart';
+import 'package:tortee/utils/image_url_host.dart';
 import 'mentor_detail_page.dart';
 
 class MentorPage extends StatelessWidget {
-  final List<Mentor> mentors = [
-    Mentor(
-        name: 'Mentor 1',
-        imageUrl:
-            'https://tortee-image-upload.s3.ap-southeast-1.amazonaws.com/0b728316-ad82-4e7b-bad6-18fedd80251d-326743518_490780646548262_9186035695995813565_n.jpg',
-        backgroundImageUrl:
-            'https://via.placeholder.com/800x400', // Replace with your background image URL
-        phoneNumber: '+1234567890',
-        companyName: 'Example Company 1'),
-    Mentor(
-        name: 'Mentor 2',
-        imageUrl:
-            'https://tortee-image-upload.s3.ap-southeast-1.amazonaws.com/0b728316-ad82-4e7b-bad6-18fedd80251d-326743518_490780646548262_9186035695995813565_n.jpg',
-        backgroundImageUrl:
-            'https://via.placeholder.com/800x400', // Replace with your background image URL
-        phoneNumber: '+1234567890',
-        companyName: 'Example Company 2'),
-    // Add more mentors here
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final MentorController controller = Get.find();
+
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 90.0, bottom: 18),
-            //   child: TextField(
-            //     decoration: InputDecoration(
-            //       hintText: 'Search Mentors',
-            //       prefixIcon: Icon(Icons.search),
-            //       border: OutlineInputBorder(
-            //         borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 4 / 4,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 8.0,
+        child: Obx(
+          () => controller.isLoading.value
+              ? Center(child: CircularProgressIndicator())
+              : Column(
+                  children: [
+                    Expanded(
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 4 / 4,
+                          crossAxisSpacing: 8.0,
+                          mainAxisSpacing: 8.0,
+                        ),
+                        itemCount: controller.mentors.length,
+                        itemBuilder: (context, index) {
+                          return MentorTile(mentor: controller.mentors[index]);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-                itemCount: mentors.length,
-                itemBuilder: (context, index) {
-                  return MentorTile(mentor: mentors[index]);
-                },
-              ),
-            ),
-          ],
         ),
       ),
     );
@@ -90,7 +67,7 @@ class MentorTile extends StatelessWidget {
             children: [
               Positioned.fill(
                 child: Image.network(
-                  mentor.imageUrl,
+                  ImageUrlHost.getImageUrl(mentor.profilePicture),
                   fit: BoxFit.cover,
                 ),
               ),

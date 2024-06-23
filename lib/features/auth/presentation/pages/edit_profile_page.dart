@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tortee/controller/accountmentee_controller.dart';
 import 'package:tortee/features/auth/presentation/pages/home_page.dart';
 import 'package:tortee/features/auth/presentation/pages/login_page.dart';
 import 'package:tortee/features/auth/presentation/widgets/auth_field.dart';
 import 'package:tortee/features/auth/presentation/widgets/auth_gradient_button.dart';
+import 'package:tortee/features/auth/presentation/widgets/footer.dart';
 
 class EditProfilePage extends StatefulWidget {
   static route() => MaterialPageRoute(builder: (context) {
         return const LoginPage();
       });
+
   const EditProfilePage({super.key});
 
   @override
@@ -20,6 +24,25 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final universityController = TextEditingController();
   final nameController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  final AccountMenteeController accountMenteeController =
+      Get.find<AccountMenteeController>();
+
+  @override
+  void initState() {
+    super.initState();
+    _populateFields();
+  }
+
+  void _populateFields() {
+    final accountMentee = accountMenteeController.accountMentee;
+    if (accountMentee != null) {
+      nameController.text = accountMentee.name;
+      emailController.text = accountMentee.email;
+      studentCodeController.text = accountMentee.studentCode;
+      universityController.text = accountMentee.university;
+    }
+  }
 
   @override
   void dispose() {
@@ -34,7 +57,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     // Replace HomePage() with the component you want to navigate to
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => HomePage()),
+      MaterialPageRoute(builder: (context) => BottomNavigationBarExample()),
     );
   }
 
@@ -51,20 +74,26 @@ class _EditProfilePageState extends State<EditProfilePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const Text(
-                  'Edit Profile',
+                  'My Profile',
                   style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 30),
-                AuthField(hintText: 'Name', controller: nameController),
+                AuthField(
+                  hintText: 'Name',
+                  controller: nameController,
+                  // Make the field read-only
+                ),
                 const SizedBox(height: 15),
                 AuthField(
                   hintText: 'Email',
                   controller: emailController,
+                  // Make the field read-only
                 ),
                 const SizedBox(height: 15),
                 AuthField(
                   hintText: 'Student Code',
                   controller: studentCodeController,
+                  // Make the field read-only
                 ),
                 const SizedBox(height: 15),
                 AuthField(
@@ -73,7 +102,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
                 const SizedBox(height: 20),
                 AuthGradientButton(
-                  buttonText: 'Save',
+                  buttonText: 'Close',
                   onPressed: _navigateToHomePage,
                 ),
                 const SizedBox(height: 10),
