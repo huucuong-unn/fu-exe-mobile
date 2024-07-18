@@ -5,12 +5,13 @@ import 'package:tortee/features/auth/presentation/pages/home_page.dart';
 import 'package:tortee/features/auth/presentation/pages/login_page.dart';
 import 'package:tortee/features/auth/presentation/widgets/auth_field.dart';
 import 'package:tortee/features/auth/presentation/widgets/auth_gradient_button.dart';
-import 'package:tortee/features/auth/presentation/widgets/footer.dart';
+
+import '../../../../core/theme/app_pallete.dart';
 
 class EditProfilePage extends StatefulWidget {
   static route() => MaterialPageRoute(builder: (context) {
-        return const LoginPage();
-      });
+    return const LoginPage();
+  });
 
   const EditProfilePage({super.key});
 
@@ -26,7 +27,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final formKey = GlobalKey<FormState>();
 
   final AccountMenteeController accountMenteeController =
-      Get.find<AccountMenteeController>();
+  Get.find<AccountMenteeController>();
 
   @override
   void initState() {
@@ -54,58 +55,62 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   void _navigateToHomePage() {
-    // Replace HomePage() with the component you want to navigate to
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => BottomNavigationBarExample()),
+      MaterialPageRoute(builder: (context) => HomePage()),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Edit Profile'),
+        backgroundColor: AppPallete.gradient1, // Customize app bar color
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(
             key: formKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
+                Text(
                   'My Profile',
                   style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: 30),
                 AuthField(
                   hintText: 'Name',
                   controller: nameController,
-                  // Make the field read-only
+
                 ),
-                const SizedBox(height: 15),
+                SizedBox(height: 15),
                 AuthField(
                   hintText: 'Email',
                   controller: emailController,
-                  // Make the field read-only
+
                 ),
-                const SizedBox(height: 15),
+                SizedBox(height: 15),
                 AuthField(
                   hintText: 'Student Code',
                   controller: studentCodeController,
-                  // Make the field read-only
+
                 ),
-                const SizedBox(height: 15),
+                SizedBox(height: 15),
                 AuthField(
                   hintText: 'University',
                   controller: universityController,
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 30),
                 AuthGradientButton(
-                  buttonText: 'Close',
-                  onPressed: _navigateToHomePage,
+                  buttonText: 'Save Changes',
+                  onPressed: () {
+                    // Implement save changes logic here
+                    _navigateToHomePage();
+                  },
                 ),
-                const SizedBox(height: 10),
               ],
             ),
           ),

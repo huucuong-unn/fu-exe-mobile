@@ -23,6 +23,7 @@ class LoginController extends GetxController {
       Map body = {
         'emailOrUsername': emailController.text.trim(),
         'password': passwordController.text,
+        'loginWithRole': "student"
       };
       http.Response response =
           await http.post(url, headers: headers, body: jsonEncode(body));
